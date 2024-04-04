@@ -1,6 +1,6 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,6 +8,29 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit test for simple App.
  */
 public class AppTest {
+
+    private Calculator calculator;
+
+    @BeforeAll
+    static void setUpForAllTest() {
+        System.out.println("Setting up ALL");
+    }
+
+    @AfterAll
+    static void tearDownForAllTest() {
+        System.out.println("Closing up ALL");
+    }
+
+    @BeforeEach
+    void setUp (){
+        calculator = new Calculator();
+        System.out.println("Setting up calculator object for new test");
+    }
+
+    @AfterEach
+    void tearDown (){
+        System.out.println("This is execution of post condition after each test");
+    }
 
     private int zeroNumber;
 
@@ -44,6 +67,7 @@ public class AppTest {
         assertFalse( 4 < 2 );
     }
 
+    // Homework №5 section.
     // №1. Check for adding zero to a positive number
     @Test
     public void testAdditionZeroToPositiveNumber (){
