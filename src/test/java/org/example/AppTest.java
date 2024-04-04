@@ -1,6 +1,6 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +9,23 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AppTest {
 
-    private int zeroNumber;
+    private Calculator calculator;
+    @BeforeAll
+    static void setUpForAllTests(){
+        System.out.println("Setting up ALL");
+    }
+    @AfterAll
+    static void tearDownForAllTests(){
+        System.out.println("Closing up ALL");
+    }
+    @BeforeEach void setUp(){
+        calculator = new Calculator();
+        System.out.println("Setting up calculator object for new test");
+    }
+    @AfterEach
+    void tearDown(){
+        System.out.println("This is execution of post condition after each test");
+    }
 
     @Test
     public void checkTwoPositiveValuesEquals(){
@@ -155,6 +171,43 @@ public class AppTest {
         CalculatorTest calculatorTest = new CalculatorTest();
 
         assertTrue(calculatorTest.firstEqualToSecond(3, 3));
+    }
+
+    //HW6 SECTION
+    //Multiply
+    @Test
+    public void testMultiplicationOfPositiveAndNegativeDoubleNumbers(){
+        assertEquals(-7.26,calculator.calculateMultiplicationOfTwoDoubleNumbers(3.3, -2.2), 0.001);
+    }
+    @Test
+    public void testMultiplicationOfTwoNegativeDoubleNumbers(){
+        assertEquals( 18.15, calculator.calculateMultiplicationOfTwoDoubleNumbers(-5.5, -3.3), 0.001);
+    }
+    @Test
+    public void testMultiplicationOfTwoPositiveDoubleNumbers(){
+        assertEquals( 58.08, calculator.calculateMultiplicationOfTwoDoubleNumbers(6.6, 8.8), 0.001);
+    }
+    @Test
+    public void testMultiplicationOfNegativeDoubleNumberByZero(){
+        assertEquals( 0, calculator.calculateMultiplicationOfTwoDoubleNumbers(-7.7, 0), 0.001);
+    }
+
+    //Divide
+    @Test
+    public void testDivisionOfPositiveDoubleNumberAndNegativeDoubleNumber(){
+        assertEquals( -3.5, calculator.calculateDivisionOfTwoDoubleNumbers(7.0, -2.0), 0.001);
+    }
+    @Test
+    public void testDivisionOfTwoNegativeDoubleNumbers(){
+        assertEquals( 2, calculator.calculateDivisionOfTwoDoubleNumbers(-8.8, -4.4), 0.001);
+    }
+    @Test
+    public void testDivisionOfPositiveDoubleNumbers   (){
+        assertEquals( 2, calculator.calculateDivisionOfTwoDoubleNumbers(16.4, 8.2), 0.001);
+    }
+    @Test
+    public void testDivisionOfNegativeDoubleNumberByZero(){
+        assertEquals(0,calculator.calculateDivisionOfTwoDoubleNumbers(-6.6, 0), 0.001);
     }
 
 }
